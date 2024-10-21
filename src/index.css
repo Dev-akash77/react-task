@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+.cc{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+}
+.container{
+  width: 90%;
+}
+.task_cont::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar */
+.task_card_main::-webkit-scrollbar {
+  display: none;
+}
