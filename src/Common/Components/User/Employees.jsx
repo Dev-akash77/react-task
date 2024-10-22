@@ -1,11 +1,11 @@
 import React from "react";
-import UserHeading from "../../UI/UserHeading";
-import TaskCard from "../../UI/TaskCard";
-import UserTask from "../../UI/UserTask";
+import UserHeading from "../../../UI/UserHeading";
+import TaskCard from './../../../UI/TaskCard';
+import UserTask from "../../../UI/UserTask";
 
 const Employees = () => {
   return (
-    <div className="bg-[#202c37] h-screen w-screen text-white">
+    <div className="bg-[#202c37] w-screen h-auto md:h-screen text-white">
       <div className="py-14">
         <UserHeading text={"akash"} />
       </div>

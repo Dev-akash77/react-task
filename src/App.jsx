@@ -1,7 +1,7 @@
 import React from 'react'
-import Login from './Components/Authentication/Login'
+// import Login from './Components/Authentication/Login'
 import './index.css'
-import Employees from './Components/User/Employees'
+import Employees from './Common/Components/User/Employees'
 const App = () => {
   return (
     <>
