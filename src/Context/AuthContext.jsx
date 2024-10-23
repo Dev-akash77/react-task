@@ -2,9 +2,7 @@ import React from 'react'
 
 const AuthContext = () => {
   return (
-    <div>
-    
-    </div>
+    <div>AuthContext</div>
   )
 }
 
