@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Heading from "./../../Common/Heading";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Heading from './../../Heading';
 
 const Login = () => {
   const [showPassword, SetshowPassword] = useState(true);

@@ -75,12 +75,12 @@ const UserTask = () => {
   ];
 
   return (
-    <div className="task_card_main flex gap-4 overflow-x-auto w-full">
+    <div className="task_card_main flex gap-4 overflow-x-auto w-full mb-5">
       {userTask.map((cur) => {
         return (
           <div
             key={cur.id}
-            className={`p-3 bg-${cur.color}-${cur.colorNumber} task_card w-[80%] md:w-[25rem] md:h-[20rem] h-auto rounded-md flex-shrink-0`}
+            className={`px-3 py-5 bg-${cur.color}-${cur.colorNumber} task_card w-[100%] md:w-[25rem] h-auto rounded-md flex-shrink-0`}
           >
             <div className="flex justify-between items-center">
               <button
