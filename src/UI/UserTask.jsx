@@ -13,6 +13,7 @@ const UserTask = () => {
       failed: 0,
       active: 2,
       color: "red",
+      colorNumber: 500,
       role: "developed",
     },
     {
@@ -26,6 +27,7 @@ const UserTask = () => {
       failed: 1,
       active: 4,
       color: "green",
+      colorNumber: 500,
       role: "E-com",
     },
     {
@@ -39,6 +41,7 @@ const UserTask = () => {
       failed: 0,
       active: 0,
       color: "blue",
+      colorNumber: 500,
       role: "Build",
     },
     {
@@ -52,6 +55,7 @@ const UserTask = () => {
       failed: 1,
       active: 3,
       color: "yellow",
+      colorNumber: 500,
       role: "Optimize",
     },
     {
@@ -65,6 +69,7 @@ const UserTask = () => {
       failed: 0,
       active: 1,
       color: "green",
+      colorNumber: 500,
       role: "developed",
     },
   ];
@@ -75,7 +80,7 @@ const UserTask = () => {
         return (
           <div
             key={cur.id}
-            className={`px-3 py-5 bg-${cur.color}-400 task_card w-[100%] md:w-[25rem] h-auto rounded-md flex-shrink-0`}
+            className={`px-3 py-5 bg-${cur.color}-${cur.colorNumber} task_card w-[100%] md:w-[25rem] h-auto rounded-md flex-shrink-0`}
           >
             <div className="flex justify-between items-center">
               <button
