@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Heading = ({heading}) => {
+const Heading = ({login}) => {
   return (
   <div className='flex flex-col gap1'>
-      <p className='text-4xl capitalize font-medium'>{heading}</p>
+      <p className='text-4xl capitalize font-medium'>{login?'Log in':'sign up'}</p>
   </div>
   )
 }

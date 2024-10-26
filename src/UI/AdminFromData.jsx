@@ -21,7 +21,7 @@ const AdminFromData = () => {
               <input
                 required
                 type="date"
-                className="bg-transparent border w-full mt-1 rounded-sm p-1 "
+                className="bg-transparent border w-full mt-1 rounded-sm p-1 cursor-pointer"
               />
             </div>
             <div className="w-full">

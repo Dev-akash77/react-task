@@ -1,16 +1,15 @@
-import React from 'react'
-import './index.css'
-import Employees from './Common/Components/User/Employees'
-import Login from './Common/Components/Authentication/Login';
-import Admin from './Pages/Admin';
+import React from "react";
+import "./index.css";
+import { AuthProvider } from "./Context/AuthContext";
+import AllComponents from "./Common/Components/AllComponents";
 const App = () => {
   return (
     <>
-    {/* <Login /> */}
-    {/* <Employees /> */}
-    <Admin />
+      <AuthProvider>
+        <AllComponents />
+      </AuthProvider>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
