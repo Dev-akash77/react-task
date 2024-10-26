@@ -155,7 +155,7 @@ export const allEmloyeeData = [
 export const adminData = [
   {
     name: "akash biswas",
-    email: "akashadmin@gmail.com",
-    password:"admin akash",
+    email: "akash@gmail.com",
+    password:"admin123",
   },
 ];

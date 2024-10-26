@@ -21,3 +21,10 @@ html {
 .task_card_main::-webkit-scrollbar {
   display: none;
 }
+.custom-toast{
+  width: 90%;
+  position: relative;
+  left: 2rem;
+  top: 1rem;
+  z-index: 10000;
+}

@@ -3,14 +3,15 @@ import UserHeading from "../UI/UserHeading";
 import AdminFromData from './../UI/AdminFromData';
 import UserStatus from "../UI/UserStatus";
 
-const Admin = () => {
+const Admin = ({userData,eData}) => {
+  
   return (
     <div className="bg-[#202c37] h-screen w-screen text-white overflow-x-hidden">
       <div className="py-8 md:py-4">
-        <UserHeading text="Akash" />
+        <UserHeading text={userData.name} />
       </div>
       <AdminFromData />
-      <UserStatus />
+      <UserStatus data={eData}/>
     </div>
   );
 };

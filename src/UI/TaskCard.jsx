@@ -6,7 +6,7 @@ const TaskCard = ({ data }) => {
       <div
         className={`bg-red-500 w-[25rem] flex flex-col justify-center items-start p-4 rounded-lg cursor-pointer text-[1.7rem] md:text-2xl font-semibold capitalize whitespace-nowrap`}>
         new tasks
-        <p>{data.new}</p>
+        <p>{data.accept}</p>
       </div>
       <div
         className={`bg-blue-500 w-[25rem] flex flex-col justify-center items-start p-4 rounded-lg cursor-pointer text-[1.7rem] md:text-2xl font-semibold capitalize whitespace-nowrap`}>
