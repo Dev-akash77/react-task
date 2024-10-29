@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 const UserTask = ({ data }) => {
+ const {handleCompleated} = useContext(AuthContext)
   return (
     <div className="task_card_main flex gap-4 overflow-x-auto w-full mb-5">
       {data.task &&
-        data.task.map((cur) => {
+        data.task.map((cur, index) => {
           return (
             <div
-              key={cur.id}
+              key={index}
               className={`px-3 py-5 bg-${cur.color}-${cur.colorNumber} task_card w-[100%] md:w-[25rem] h-auto rounded-md flex-shrink-0`}
             >
               <div className="flex justify-between items-center">
@@ -22,6 +24,7 @@ const UserTask = ({ data }) => {
               <p className="text-md mt-2">{cur.taskDescription}</p>
               <div className="flex flex-col gap-2 w-full mt-4 justify-end">
                 <button
+                  onClick={(e) => handleCompleated(cur,e)}
                   className={`bg-[rgba(0,0,0,.5)] ${
                     cur.complitated
                       ? "bg-[rgba(0,0,0,.5)]"
@@ -31,19 +34,30 @@ const UserTask = ({ data }) => {
                   {cur.complitated ? "Compleated" : "Marks as compleated"}
                 </button>
                 <button
+                 onClick={(e) => handleCompleated(cur,e)}
                   className={`${
                     cur.failed ? "bg-[rgba(0,0,0,.5)]" : `bg-[rgba(0,0,0,.8)]`
                   } px-3 py-2 text-md capitalize rounded-md font-bold outline-none  w-full`}
                 >
                   {cur.failed ? "Failed" : "Marks as Failed"}
                 </button>
+                <button
+                 onClick={(e) => handleCompleated(cur,e)}
+                  className={`${
+                    cur.accepted ? "bg-[rgba(0,0,0,.5)]" : `bg-[rgba(0,0,0,.8)]`
+                  } px-3 py-2 text-md capitalize rounded-md font-bold outline-none  w-full`}
+                >
+                  {cur.accepted ? "Accepted" : "Marks as Accepted"}
+                </button>
               </div>
             </div>
           );
         })}
 
-      {data.task.length==0 && (
-        <div className={`px-3 py-5 text-3xl md:text-4xl capitalize bg-[#2b3945] task_card w-[100%] h-[20rem] rounded-md flex-shrink-0 cc leading-[4rem] text-center md:leading-[4.3rem]`}>
+      {data.task.length == 0 && (
+        <div
+          className={`px-3 py-5 text-3xl md:text-4xl capitalize bg-[#2b3945] task_card w-[100%] h-[20rem] rounded-md flex-shrink-0 cc leading-[4rem] text-center md:leading-[4.3rem]`}
+        >
           Tasks Providing Soon
           <br />
           Chill time {data.name.split(" ")[0]}

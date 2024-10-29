@@ -5,7 +5,7 @@ import UserTask from "../../../UI/UserTask";
 
 const Employees = ({data}) => {
   return (
-    <div className="bg-[#202c37] w-screen h-screen md:h-screen text-white">
+    <div className="bg-[#202c37] w-screen h-auto text-white">
       <div className="py-8 md:py-12">
         <UserHeading text={data.name} />
       </div>

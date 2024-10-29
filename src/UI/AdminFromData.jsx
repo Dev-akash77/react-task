@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 const AdminFromData = () => {
+  const {adminFromData,handleAdminFromData,handleAdmitSubmited} = useContext(AuthContext)
   return (
     <div className="cc">
       <div className="container">
-        <form className="bg-[#2b3945] p-4 flex flex-col md:flex-row justify-between gap-2 md:gap-14">
+        <form className="bg-[#2b3945] p-4 flex flex-col md:flex-row justify-between gap-2 md:gap-14" onSubmit={(e)=>{handleAdmitSubmited(e)}}>
           {/*  */}
           <div className="md:w-[40%] w-full flex flex-col gap-2">
             <div className="w-full">
               <h4 className="text-md">Task Title</h4>
               <input
                 required
+                onChange={(e) => {
+                  handleAdminFromData(e);
+                }}
+                name="title"
+                value={adminFromData.name}
                 type="text"
                 className="bg-transparent border w-full mt-1 rounded-sm p-1"
                 placeholder="Title"
@@ -20,7 +27,12 @@ const AdminFromData = () => {
               <h4 className="text-md">Date</h4>
               <input
                 required
+                onChange={(e) => {
+                  handleAdminFromData(e);
+                }}
                 type="date"
+                name="date"
+                value={adminFromData.date}
                 className="bg-transparent border w-full mt-1 rounded-sm p-1 cursor-pointer"
               />
             </div>
@@ -28,16 +40,26 @@ const AdminFromData = () => {
               <h4 className="text-md">Assign To</h4>
               <input
                 required
+                onChange={(e) => {
+                  handleAdminFromData(e);
+                }}
                 type="text"
+                name="userName"
+                value={adminFromData.userName}
                 className="bg-transparent border w-full mt-1 rounded-sm p-1"
-                placeholder="User ID"
+                placeholder="User Name"
               />
             </div>
             <div className="w-full">
               <h4 className="text-md">Category</h4>
               <input
                 required
+                onChange={(e) => {
+                  handleAdminFromData(e);
+                }}
                 type="text"
+                name="category"
+                value={adminFromData.category}
                 className="bg-transparent border w-full mt-1 rounded-sm p-1"
                 placeholder="design, dev , etc...."
               />
@@ -46,7 +68,11 @@ const AdminFromData = () => {
               <h4 className="text-md">Colour:</h4>
               <select
                 required
-                name="Color"
+                onChange={(e) => {
+                  handleAdminFromData(e);
+                }}
+                name="colour"
+                value={adminFromData.colour}
                 className="bg-transparent border w-full mt-1 rounded-sm p-1 cursor-pointer outline-none"
               >
                 <option
@@ -88,7 +114,11 @@ const AdminFromData = () => {
             <textarea
               rows={10}
               required
+              onChange={(e) => {
+                handleAdminFromData(e);
+              }}
               name="description"
+              value={adminFromData.description}
               className="bg-transparent border w-full mt-1 rounded-sm outline-none p-1 h-[74%]"
             ></textarea>
             <button

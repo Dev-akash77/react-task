@@ -17,13 +17,16 @@ export const AuthProvider = ({ children }) => {
   const [userRole, setUserRole] = useState(
     JSON.parse(localStorage.getItem("role")) || null
   );
+
+
   useEffect(() => {
     localStorage.setItem("employee", JSON.stringify(employees)); //? all emloyee data
     localStorage.setItem("admin", JSON.stringify(admin)); //? all admin data
     localStorage.setItem("userdata", JSON.stringify(userdata)); //? all admin data
     localStorage.setItem("role", JSON.stringify(userRole)); //? user role
   }, [employees, admin, userdata]);
- 
+
+
   // ! all from data
   const [signIn, setSignIn] = useState(false);
   const [fromData, setFromData] = useState({
@@ -31,6 +34,7 @@ export const AuthProvider = ({ children }) => {
     email: "",
     password: "",
   });
+
 
   //! change from data
   const handleChangeFromData = (e) => {
@@ -40,6 +44,7 @@ export const AuthProvider = ({ children }) => {
       [name]: value,
     }));
   };
+
 
   //! sign up functionality
   const handleClickSubmit = (e) => {
@@ -61,6 +66,8 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+
+
   // ! login functionality
   const handleLogin = (e) => {
     e.preventDefault();
@@ -73,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     if (userData) {
       setUserdata(userData);
       setUserRole("employee");
-      toast.success('Login Succesfully', {
+      toast.success("Login Succesfully", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -84,17 +91,21 @@ export const AuthProvider = ({ children }) => {
         theme: "light",
         transition: Bounce,
         className: "custom-toast",
-        });
+      });
     }
 
+
+
     //! logic for admin dashboard
-    const adminD=JSON.parse(localStorage.getItem("admin"));
-    const adminData= adminD.find((cur)=>cur.email == email && cur.password == password);
+    const adminD = JSON.parse(localStorage.getItem("admin"));
+    const adminData = adminD.find(
+      (cur) => cur.email == email && cur.password == password
+    );
 
     if (adminData) {
-       setUserdata(adminData);
-       setUserRole("admin");
-       toast.success('Login into Admin', {
+      setUserdata(adminData);
+      setUserRole("admin");
+      toast.success("Login into Admin", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -105,11 +116,11 @@ export const AuthProvider = ({ children }) => {
         theme: "light",
         transition: Bounce,
         className: "custom-toast",
-        });
+      });
     }
 
     if (!userData && !adminData) {
-      toast.error('invalid credential', {
+      toast.error("invalid credential", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -120,14 +131,18 @@ export const AuthProvider = ({ children }) => {
         theme: "light",
         transition: Bounce,
         className: "custom-toast",
-        });
+      });
     }
-  }
+  };
+
+
+
+
   // ! logout function
   const handleLogout = () => {
     setUserdata([]);
-    setUserRole(null)
-    toast.success('Logout Succesfully', {
+    setUserRole(null);
+    toast.success("Logout Succesfully", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -138,8 +153,137 @@ export const AuthProvider = ({ children }) => {
       theme: "light",
       transition: Bounce,
       className: "custom-toast",
-      });
+    });
   };
+
+
+
+  //! admin all function  ****************************************************************************************************
+  //? admin from data
+  const [adminFromData, setAdminFromData] = useState({
+    title: "",
+    date: "",
+    userName: "",
+    category: "",
+    colour: "",
+    description: "",
+  });
+
+  //? admin from data changed
+  const handleAdminFromData = (e) => {
+    const { name, value } = e.target;
+    setAdminFromData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+
+  const handleAdmitSubmited = (e) => {
+    e.preventDefault();
+    setEmployees((prevEmployees) => {
+      const updatedEmployees = prevEmployees.map((cur) => {
+        if (
+          cur.name.split(" ")[0].toLowerCase() ===
+          adminFromData.userName.toLowerCase()
+        ) {
+          return {
+            ...cur,
+            task: [
+              ...cur.task,
+              {
+                active: true,
+                color: adminFromData.colour,
+                colorNumber: 500,
+                complitated: false,
+                createdDate: adminFromData.date,
+                failed: false,
+                role: adminFromData.category,
+                taskDescription: adminFromData.description,
+                teskTitle: adminFromData.title,
+              },
+            ],
+          };
+        }
+        return cur;
+      });
+      if (updatedEmployees) {
+        setAdminFromData({
+          title: "",
+          date: "",
+          userName: "",
+          category: "",
+          colour: "",
+          description: "",
+        });
+      }
+      return updatedEmployees;
+    });
+  };
+
+  //! user value changes data such as compleated tasks , new tasks , faild tasks , accecpted tasks
+  // const handleCompleated = (tasks) => {
+  //   if (tasks.complitated) {
+  //         tasks.complitated=true
+  //     setUserdata((prev)=>{
+  //       return{
+  //         ...prev
+  //       }
+  //     })
+  //     const updatingEmployee= employees.filter((cur)=>{
+  //       userdata.some((curelem)=>{
+  //         return cur.task.teskTitle==curelem.teskTitle
+  //       })
+  //     })
+  //     console.log(updatingEmployee);
+      
+  //   }
+
+  // }; 
+
+
+
+
+
+
+
+
+  const handleCompleated = (task) => {
+    if (!task.complitated) {
+      // Mark task as completed in `userdata`
+      const updatedTasks = userdata.task.map((curTask) =>
+        curTask.teskTitle === task.teskTitle ? { ...curTask, complitated: true } : curTask
+      );
+  
+      const updatedUserData = { ...userdata, task: updatedTasks };
+      setUserdata(updatedUserData);
+  
+      // Update the specific employee's tasks in `employees`
+      const updatedEmployees = employees.map((curEmployee) => {
+        if (curEmployee.task.some((curTask) => curTask.teskTitle === task.teskTitle)) {
+          const updatedEmployeeTasks = curEmployee.task.map((curTask) =>
+            curTask.teskTitle === task.teskTitle ? { ...curTask, complitated: true } : curTask
+          );
+          return { ...curEmployee, task: updatedEmployeeTasks };
+        }
+        return curEmployee;
+      });
+  
+      setEmployees(updatedEmployees);
+    }
+  };
+  
+  
+
+
+
+
+
+
+
+
+
+
 
   return (
     <AuthContext.Provider
@@ -161,6 +305,15 @@ export const AuthProvider = ({ children }) => {
         // ! logout
         handleLogout,
         // ! logout
+        //? admin data
+        adminFromData,
+        setAdminFromData,
+        handleAdminFromData,
+        handleAdmitSubmited,
+        //? admin data
+        //!user value changed
+        handleCompleated
+        //!user value changed
       }}
     >
       <ToastContainer />
