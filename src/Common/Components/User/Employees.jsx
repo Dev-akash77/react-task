@@ -11,7 +11,7 @@ const Employees = ({data}) => {
       </div>
       <div className="cc flex items-center justify-between gap-2">
         <div className="container flex items-center flex-col justify-between gap-[2rem] md:gap-[4rem]">
-          <TaskCard data={data.dashboard}/>
+          <TaskCard data={data}/>
           <UserTask data={data}/>
         </div>
       </div>

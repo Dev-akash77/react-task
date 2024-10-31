@@ -18,14 +18,12 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("role")) || null
   );
 
-
   useEffect(() => {
     localStorage.setItem("employee", JSON.stringify(employees)); //? all emloyee data
     localStorage.setItem("admin", JSON.stringify(admin)); //? all admin data
     localStorage.setItem("userdata", JSON.stringify(userdata)); //? all admin data
     localStorage.setItem("role", JSON.stringify(userRole)); //? user role
   }, [employees, admin, userdata]);
-
 
   // ! all from data
   const [signIn, setSignIn] = useState(false);
@@ -34,7 +32,6 @@ export const AuthProvider = ({ children }) => {
     email: "",
     password: "",
   });
-
 
   //! change from data
   const handleChangeFromData = (e) => {
@@ -45,7 +42,6 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
-
   //! sign up functionality
   const handleClickSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +49,7 @@ export const AuthProvider = ({ children }) => {
       ...previus,
       {
         ...fromData,
-        dashboard: { new: 0, accept: 0, complete: 0, failed: 0 },
+        // dashboard: { new: 0, accept: 0, complete: 0, failed: 0 },
         task: [],
       },
     ]);
@@ -65,8 +61,6 @@ export const AuthProvider = ({ children }) => {
       password: "",
     });
   };
-
-
 
   // ! login functionality
   const handleLogin = (e) => {
@@ -93,8 +87,6 @@ export const AuthProvider = ({ children }) => {
         className: "custom-toast",
       });
     }
-
-
 
     //! logic for admin dashboard
     const adminD = JSON.parse(localStorage.getItem("admin"));
@@ -135,9 +127,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-
-
-
   // ! logout function
   const handleLogout = () => {
     setUserdata([]);
@@ -155,8 +144,6 @@ export const AuthProvider = ({ children }) => {
       className: "custom-toast",
     });
   };
-
-
 
   //! admin all function  ****************************************************************************************************
   //? admin from data
@@ -178,7 +165,6 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
-
   const handleAdmitSubmited = (e) => {
     e.preventDefault();
     setEmployees((prevEmployees) => {
@@ -192,7 +178,8 @@ export const AuthProvider = ({ children }) => {
             task: [
               ...cur.task,
               {
-                active: true,
+                active: false,
+                new: true,
                 color: adminFromData.colour,
                 colorNumber: 500,
                 complitated: false,
@@ -219,71 +206,145 @@ export const AuthProvider = ({ children }) => {
       }
       return updatedEmployees;
     });
+    toast.success(`task asign to ${adminFromData.userName} successfully`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      className: "custom-toast",
+      });
   };
 
   //! user value changes data such as compleated tasks , new tasks , faild tasks , accecpted tasks
-  // const handleCompleated = (tasks) => {
-  //   if (tasks.complitated) {
-  //         tasks.complitated=true
-  //     setUserdata((prev)=>{
-  //       return{
-  //         ...prev
-  //       }
-  //     })
-  //     const updatingEmployee= employees.filter((cur)=>{
-  //       userdata.some((curelem)=>{
-  //         return cur.task.teskTitle==curelem.teskTitle
-  //       })
-  //     })
-  //     console.log(updatingEmployee);
-      
-  //   }
-
-  // }; 
-
-
-
-
-
-
-
 
   const handleCompleated = (task) => {
     if (!task.complitated) {
       // Mark task as completed in `userdata`
       const updatedTasks = userdata.task.map((curTask) =>
-        curTask.teskTitle === task.teskTitle ? { ...curTask, complitated: true } : curTask
+        curTask.teskTitle === task.teskTitle
+          ? { ...curTask, complitated: true }
+          : curTask
       );
-  
+
       const updatedUserData = { ...userdata, task: updatedTasks };
       setUserdata(updatedUserData);
-  
+
       // Update the specific employee's tasks in `employees`
       const updatedEmployees = employees.map((curEmployee) => {
-        if (curEmployee.task.some((curTask) => curTask.teskTitle === task.teskTitle)) {
+        if (
+          curEmployee.task.some(
+            (curTask) => curTask.teskTitle === task.teskTitle
+          )
+        ) {
           const updatedEmployeeTasks = curEmployee.task.map((curTask) =>
-            curTask.teskTitle === task.teskTitle ? { ...curTask, complitated: true } : curTask
+            curTask.teskTitle === task.teskTitle
+              ? { ...curTask, complitated: true }
+              : curTask
           );
           return { ...curEmployee, task: updatedEmployeeTasks };
         }
         return curEmployee;
       });
-  
+
       setEmployees(updatedEmployees);
     }
   };
-  
-  
 
+  const handleAccepted = (task) => {
+    if (!task.active) {
+      // Mark task as completed in `userdata`
+      const updatedTasks = userdata.task.map((curTask) =>
+        curTask.teskTitle === task.teskTitle
+          ? { ...curTask, active: true }
+          : curTask
+      );
 
+      const updatedUserData = { ...userdata, task: updatedTasks };
+      setUserdata(updatedUserData);
 
+      // Update the specific employee's tasks in `employees`
+      const updatedEmployees = employees.map((curEmployee) => {
+        if (
+          curEmployee.task.some(
+            (curTask) => curTask.teskTitle === task.teskTitle
+          )
+        ) {
+          const updatedEmployeeTasks = curEmployee.task.map((curTask) =>
+            curTask.teskTitle === task.teskTitle
+              ? { ...curTask, active: true }
+              : curTask
+          );
+          return { ...curEmployee, task: updatedEmployeeTasks };
+        }
+        return curEmployee;
+      });
 
+      setEmployees(updatedEmployees);
+    }
+  };
 
+  const handleFailed = (task) => {
+    if (!task.failed) {
+      // Mark task as completed in `userdata`
+      const updatedTasks = userdata.task.map((curTask) =>
+        curTask.teskTitle === task.teskTitle
+          ? { ...curTask, failed: true }
+          : curTask
+      );
 
+      const updatedUserData = { ...userdata, task: updatedTasks };
+      setUserdata(updatedUserData);
 
+      // Update the specific employee's tasks in `employees`
+      const updatedEmployees = employees.map((curEmployee) => {
+        if (
+          curEmployee.task.some(
+            (curTask) => curTask.teskTitle === task.teskTitle
+          )
+        ) {
+          const updatedEmployeeTasks = curEmployee.task.map((curTask) =>
+            curTask.teskTitle === task.teskTitle
+              ? { ...curTask, failed: true }
+              : curTask
+          );
+          return { ...curEmployee, task: updatedEmployeeTasks };
+        }
+        return curEmployee;
+      });
 
+      setEmployees(updatedEmployees);
+    }
+  };
 
+  // ? delet account feature ///////////////////////////////////////////////////////////
 
+  const handleDeletAccount = (curEmployee) => {
+    const updatedEmployees = employees.filter((cur) => {
+      return cur.email != curEmployee.email;
+    });
+    if (updatedEmployees) {
+      setEmployees(updatedEmployees);
+      setUserdata([]);
+      setUserRole(null);
+      toast.success("Deleted account successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        className: "custom-toast",
+      });
+    }
+  };
 
   return (
     <AuthContext.Provider
@@ -304,6 +365,7 @@ export const AuthProvider = ({ children }) => {
         //? user data end
         // ! logout
         handleLogout,
+        handleDeletAccount,
         // ! logout
         //? admin data
         adminFromData,
@@ -312,7 +374,9 @@ export const AuthProvider = ({ children }) => {
         handleAdmitSubmited,
         //? admin data
         //!user value changed
-        handleCompleated
+        handleCompleated,
+        handleAccepted,
+        handleFailed,
         //!user value changed
       }}
     >

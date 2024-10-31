@@ -19,7 +19,7 @@ const AdminFromData = () => {
                 name="title"
                 value={adminFromData.name}
                 type="text"
-                className="bg-transparent border w-full mt-1 rounded-sm p-1"
+                className="bg-transparent outline-none border w-full mt-1 rounded-sm p-1"
                 placeholder="Title"
               />
             </div>
@@ -33,7 +33,7 @@ const AdminFromData = () => {
                 type="date"
                 name="date"
                 value={adminFromData.date}
-                className="bg-transparent border w-full mt-1 rounded-sm p-1 cursor-pointer"
+                className="bg-transparent outline-none border w-full mt-1 rounded-sm p-1 cursor-pointer"
               />
             </div>
             <div className="w-full">
@@ -46,7 +46,7 @@ const AdminFromData = () => {
                 type="text"
                 name="userName"
                 value={adminFromData.userName}
-                className="bg-transparent border w-full mt-1 rounded-sm p-1"
+                className="bg-transparent outline-none border w-full mt-1 rounded-sm p-1"
                 placeholder="User Name"
               />
             </div>
@@ -60,7 +60,7 @@ const AdminFromData = () => {
                 type="text"
                 name="category"
                 value={adminFromData.category}
-                className="bg-transparent border w-full mt-1 rounded-sm p-1"
+                className="bg-transparent outline-none border w-full mt-1 rounded-sm p-1"
                 placeholder="design, dev , etc...."
               />
             </div>
