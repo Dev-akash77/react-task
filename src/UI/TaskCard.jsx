@@ -28,7 +28,7 @@ const TaskCard = ({ data }) => {
         <p>{accept.length}</p>
       </div>
       <div
-        className={`bg-green-500 w-[25rem] flex flex-col justify-center items-start p-4 rounded-lg cursor-pointer text-[1.7rem] md:text-2xl font-semibold capitalize whitespace-nowrap`}>
+        className={`bg-green-500 w-[25.1rem] flex flex-col justify-center items-start p-4 rounded-lg cursor-pointer text-[1.7rem] md:text-2xl font-semibold capitalize whitespace-nowrap`}>
         completated tasks
         <p>{compleated.length}</p>
       </div>
