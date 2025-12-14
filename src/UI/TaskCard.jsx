@@ -1,9 +1,7 @@
 import React from "react";
 
 const TaskCard = ({ data }) => {
-  const compleated= data.task.filter((cur)=>{
-    return cur.complitated
-  })
+  const compleated= data.task.filter((cur)=>cur.complitated)
   
   const accept= data.task.filter((cur)=>{
     return cur.active
