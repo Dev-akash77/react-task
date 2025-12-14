@@ -11,9 +11,7 @@ const TaskCard = ({ data }) => {
   const faildTask= data.task.filter((cur)=>{
     return cur.failed
   })
-  const newTask= data.task.filter((cur)=>{
-    return cur.new
-  })
+  const newTask= data.task.filter((cur)=> cur.new)
 
   return (
     <div className="flex items-center justify-between gap-4 w-full overflow-x-auto task_cont">
